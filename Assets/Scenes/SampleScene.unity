@@ -227,9 +227,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mousePos: {x: 0, y: 0}
+  x: 0
+  jump: 0
   player: {fileID: 1731229036}
-  playerRB: {fileID: 0}
-  playerANI: {fileID: 0}
   projectilePRF: {fileID: 1695910107117438767, guid: 4acecb1fe914b42489ff5e54b37fda63, type: 3}
 --- !u!4 &265286767
 Transform:
@@ -516,6 +516,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &550010066
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 550010067}
+  - component: {fileID: 550010068}
+  m_Layer: 0
+  m_Name: State Machine
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &550010067
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 550010066}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1731229037}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &550010068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 550010066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30495f118cdc1bc40b3f779322a52bd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &617791439
 GameObject:
   m_ObjectHideFlags: 0
@@ -869,6 +913,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ccdaff3c231b3c45a09f7bd5b91f8ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 0}
+  ani: {fileID: 0}
   HP: 10
 --- !u!1 &1731229034
 GameObject:
@@ -927,8 +973,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50887d76d3afb00468ec0874e1dcfea4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 2
-  jumpForce: 5
+  rb: {fileID: 0}
+  ani: {fileID: 0}
+  stateMachine: {fileID: 0}
+  _moveSpeed: 2
+  _jumpForce: 4
 --- !u!4 &1731229037
 Transform:
   m_ObjectHideFlags: 0
@@ -944,6 +993,7 @@ Transform:
   m_Children:
   - {fileID: 617791440}
   - {fileID: 1774570964}
+  - {fileID: 550010067}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1774570963

@@ -6,12 +6,11 @@ public class InputManager : Singleton<InputManager> {
 
     [SerializeField] private Vector2 _mousePos;
     public Vector2 mousePos { get => _mousePos; }
+    
+    public float x;
+    public bool jump;
 
     [SerializeField] Player player;
-    [SerializeField] Rigidbody2D playerRB;
-    [SerializeField] Animator playerANI;
-
-    [SerializeField] Projectile projectilePRF;
 
     int idleHash;
     int runHash;
@@ -19,8 +18,6 @@ public class InputManager : Singleton<InputManager> {
     // Start is called before the first frame update
     void Start()
     {
-        playerRB = player.GetComponentInChildren<Rigidbody2D>();
-        playerANI = player.GetComponentInChildren<Animator>();
         Debug.Log(nameof(InputManager) + "service has been active");
         idleHash = Animator.StringToHash("idle");
         runHash = Animator.StringToHash("run");
@@ -30,21 +27,16 @@ public class InputManager : Singleton<InputManager> {
     void Update()
     {
         _mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        var x = Input.GetAxisRaw("Horizontal");
-        playerRB.velocityX = x * player.moveSpeed;
-        if (playerRB.velocityX == 0){
-            playerANI.CrossFade(idleHash,0);
-        } else {
-            playerANI.CrossFade(runHash,0);
-            player.transform.localScale = new Vector3(x,1,1);
-        }
+        x = Input.GetAxisRaw("Horizontal");
+        player.rb.velocityX = x * player.moveSpeed;
         if (Input.GetKeyDown(KeyCode.Space)){
-            playerRB.velocityY = player.jumpForce;
+            jump = true;
         }
-        if (Input.GetKeyDown(KeyCode.J)){
-            var projectile = Instantiate(projectilePRF,player.transform.position,Quaternion.identity);
-            projectile.GetComponent<Rigidbody2D>().velocity = new Vector2(player.transform.localScale.x*projectile.speed,0);
-        }
+        else jump = false;
+        // if (Input.GetKeyDown(KeyCode.J)){
+        //     var projectile = Instantiate(projectilePRF,player.transform.position,Quaternion.identity);
+        //     projectile.GetComponent<Rigidbody2D>().velocity = new Vector2(player.transform.localScale.x*projectile.speed,0);
+        // }
     }
 
     void FixedUpdate(){
