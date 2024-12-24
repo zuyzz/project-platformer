@@ -7,5 +7,4 @@ public interface IState {
     void OnUpdate();
     void OnFixedUpdate();
     void OnExit();
-    bool Condition();
 }

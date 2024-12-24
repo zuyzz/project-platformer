@@ -2,10 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class PlayerJumpState : BaseState {
+
+    [Header("Properties")]
+    [SerializeField] float force;
+    [SerializeField] float gravity;
+
     public override void OnEnter(){
-        player.ani.CrossFade(Animator.StringToHash("jump"),0);
-        player.rb.AddForceY(player.jumpForce, ForceMode2D.Impulse);
+        entity.ani.Play(animationClip.name);
+        entity.rb.AddForceY(force, ForceMode2D.Impulse);
+        entity.rb.gravityScale = gravity;
     }
 
     public override void OnUpdate(){
@@ -20,8 +27,8 @@ public class PlayerJumpState : BaseState {
         
     }
 
-    public override bool Condition(){
-        return InputManager.Instance.jump
-        && Physics2D.Raycast(player.transform.position,Vector2.down,1);
+    public override bool IsAvailable(){
+        return Physics2D.Raycast(entity.transform.position,Vector2.down,1,LayerMask.GetMask("Ground"))
+        && InputManager.Instance.jump;
     }
 }

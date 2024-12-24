@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class BaseState : IState {
-    protected Player player;
-    public void Init(Player player){
-        this.player = player;
+    protected Entity entity;
+    public void Init(Entity entity) {
+        this.entity = entity;
     }
+
+    [SerializeField] protected AnimationClip animationClip;
 
     public abstract void OnEnter();
     public abstract void OnUpdate();
     public abstract void OnFixedUpdate();
     public abstract void OnExit();
-    public abstract bool Condition();
+
+    public abstract bool IsAvailable();
 }

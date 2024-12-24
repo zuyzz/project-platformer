@@ -19,8 +19,6 @@ public class InputManager : Singleton<InputManager> {
     void Start()
     {
         Debug.Log(nameof(InputManager) + "service has been active");
-        idleHash = Animator.StringToHash("idle");
-        runHash = Animator.StringToHash("run");
     }
 
     // Update is called once per frame
@@ -28,7 +26,6 @@ public class InputManager : Singleton<InputManager> {
     {
         _mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         x = Input.GetAxisRaw("Horizontal");
-        player.rb.velocityX = x * player.moveSpeed;
         if (Input.GetKeyDown(KeyCode.Space)){
             jump = true;
         }
