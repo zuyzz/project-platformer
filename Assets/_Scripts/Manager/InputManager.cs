@@ -9,11 +9,9 @@ public class InputManager : Singleton<InputManager> {
     
     public float x;
     public bool jump;
+    public bool dash;
 
     [SerializeField] Player player;
-
-    int idleHash;
-    int runHash;
     
     // Start is called before the first frame update
     void Start()
@@ -30,6 +28,10 @@ public class InputManager : Singleton<InputManager> {
             jump = true;
         }
         else jump = false;
+        if (Input.GetKeyDown(KeyCode.LeftShift)){
+            dash = true;
+        }
+        else dash = false;
         // if (Input.GetKeyDown(KeyCode.J)){
         //     var projectile = Instantiate(projectilePRF,player.transform.position,Quaternion.identity);
         //     projectile.GetComponent<Rigidbody2D>().velocity = new Vector2(player.transform.localScale.x*projectile.speed,0);

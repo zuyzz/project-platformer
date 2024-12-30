@@ -7,4 +7,6 @@ public interface IState {
     void OnUpdate();
     void OnFixedUpdate();
     void OnExit();
+    bool ValidateEnter();
+    bool ValidateExit();
 }

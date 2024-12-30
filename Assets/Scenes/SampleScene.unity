@@ -229,6 +229,7 @@ MonoBehaviour:
   _mousePos: {x: 0, y: 0}
   x: 0
   jump: 0
+  dash: 0
   player: {fileID: 1731229036}
 --- !u!4 &265286767
 Transform:
@@ -372,7 +373,7 @@ Transform:
   m_GameObject: {fileID: 277460517}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.96, z: 0}
+  m_LocalPosition: {x: 0, y: -2.55, z: 0}
   m_LocalScale: {x: 14.49, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -556,54 +557,98 @@ MonoBehaviour:
   m_GameObject: {fileID: 550010066}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30495f118cdc1bc40b3f779322a52bd2, type: 3}
+  m_Script: {fileID: 11500000, guid: 987eca762c5dcba4cb26b838450083b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anyNodes:
+  - id: 32
+    state:
+      rid: 1498993477780504675
   stateNodes:
-  - state:
-      rid: 1498993330029330501
-    from: idle
-    to:
-    - run
-    - jump
-  - state:
-      rid: 1498993330029330503
-    from: run
-    to:
-    - idle
-    - jump
-  - state:
-      rid: 1498993330029330504
-    from: jump
-    to:
-    - fall
-  - state:
-      rid: 1498993334874013799
-    from: fall
-    to:
-    - idle
-    - run
+  - id: 2
+    state:
+      rid: 1498993477780504676
+  - id: 4
+    state:
+      rid: 1498993477780504655
+  - id: 8
+    state:
+      rid: 1498993477780504660
+  - id: 16
+    state:
+      rid: 1498993477780504686
   references:
     version: 2
     RefIds:
-    - rid: 1498993330029330501
-      type: {class: PlayerIdleState, ns: , asm: Assembly-CSharp}
-      data:
-        animationClip: {fileID: 7400000, guid: 7473a7e6a69380b409a188cf0d0fd27b, type: 2}
-    - rid: 1498993330029330503
+    - rid: 1498993477780504655
       type: {class: PlayerRunState, ns: , asm: Assembly-CSharp}
       data:
+        onEnterState:
+          m_PersistentCalls:
+            m_Calls: []
+        onExitState:
+          m_PersistentCalls:
+            m_Calls: []
+        animator: {fileID: 617791442}
+        rigidbody: {fileID: 1731229035}
+        transform: {fileID: 1731229037}
         animationClip: {fileID: 7400000, guid: 9bb3534b0834b9a40b234027e6f36b1c, type: 2}
         speed: 2
-    - rid: 1498993330029330504
+    - rid: 1498993477780504660
       type: {class: PlayerJumpState, ns: , asm: Assembly-CSharp}
       data:
+        onEnterState:
+          m_PersistentCalls:
+            m_Calls: []
+        onExitState:
+          m_PersistentCalls:
+            m_Calls: []
+        animator: {fileID: 617791442}
+        rigidbody: {fileID: 1731229035}
+        transform: {fileID: 1731229037}
         animationClip: {fileID: 7400000, guid: 85c1971d6b903ab4f886fdbedff34e5a, type: 2}
-        force: 6
+        force: 5
         gravity: 1
-    - rid: 1498993334874013799
+    - rid: 1498993477780504675
+      type: {class: PlayerDashState, ns: , asm: Assembly-CSharp}
+      data:
+        onEnterState:
+          m_PersistentCalls:
+            m_Calls: []
+        onExitState:
+          m_PersistentCalls:
+            m_Calls: []
+        animator: {fileID: 617791442}
+        rigidbody: {fileID: 1731229035}
+        transform: {fileID: 1731229037}
+        animationClip: {fileID: 7400000, guid: 00c22bf368fe9404a9089e04ca4463a5, type: 2}
+        distance: 5
+        duration: 0.6
+    - rid: 1498993477780504676
+      type: {class: PlayerIdleState, ns: , asm: Assembly-CSharp}
+      data:
+        onEnterState:
+          m_PersistentCalls:
+            m_Calls: []
+        onExitState:
+          m_PersistentCalls:
+            m_Calls: []
+        animator: {fileID: 617791442}
+        rigidbody: {fileID: 1731229035}
+        transform: {fileID: 1731229037}
+        animationClip: {fileID: 7400000, guid: 7473a7e6a69380b409a188cf0d0fd27b, type: 2}
+    - rid: 1498993477780504686
       type: {class: PlayerFallState, ns: , asm: Assembly-CSharp}
       data:
+        onEnterState:
+          m_PersistentCalls:
+            m_Calls: []
+        onExitState:
+          m_PersistentCalls:
+            m_Calls: []
+        animator: {fileID: 617791442}
+        rigidbody: {fileID: 1731229035}
+        transform: {fileID: 1731229037}
         animationClip: {fileID: 7400000, guid: 3248b2af7ae048d4db291d5157c27fbb, type: 2}
         gravity: 1.3
 --- !u!1 &617791439
@@ -1021,7 +1066,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
   ani: {fileID: 0}
-  stateMachine: {fileID: 0}
 --- !u!4 &1731229037
 Transform:
   m_ObjectHideFlags: 0
